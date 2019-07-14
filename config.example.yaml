@@ -1,0 +1,17 @@
+slack:
+  token: <Slack OAuth token>
+  channel_id: <ID of Slack channel to post in> # Note: Slack must have post access to the channel
+
+hosts:
+  host_type_name:
+    username: <IPMI username for these hosts>
+    password: <IPMI password for these hosts>
+    hosts:
+      - <IP Addresses of hosts>
+      - <Yet another ip with the same credentials>
+  another_host_type:
+    username: <Different IPMI username>
+    password: <Different IPMI password>
+    hosts:
+      - <IP Address for different hosts>
+  
