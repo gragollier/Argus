@@ -15,7 +15,6 @@ build_image:
 deploy_kube:
   image: harbor.ggollier.com/infra/kube:latest
   stage: deploy
-  when: manual
   script:
     - kubectl delete Deployment argus --namespace=argus || echo "Deployment not found"
     - kubectl apply --namespace=argus -f deploy/deployment.yaml

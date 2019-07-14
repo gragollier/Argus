@@ -3,7 +3,7 @@ import yaml
 from modules.HostMonitor import HostMonitor
 from time import sleep
 
-EVENT_LOOP_SLEEP = 10 # Sleep time for main event loop in seconds
+EVENT_LOOP_SLEEP = 60 * 5 # Sleep time for main event loop in seconds
 
 def send_slack(client: SlackClient, channel: str, message: str):
     print(f"Sending message {message} to channel {channel}")
