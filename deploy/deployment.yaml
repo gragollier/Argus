@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argus
+spec:
+  selector:
+    matchLabels:
+      app: argus
+  template:
+    metadata:
+      labels:
+        app: argus
+    spec:
+      containers:
+      - name: argus
+        image: harbor.ggollier.com/infra/argus:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

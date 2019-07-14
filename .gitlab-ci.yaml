@@ -1,0 +1,21 @@
+image: harbor.ggollier.com/infra/docker:latest
+stages:
+  - build
+  - deploy
+
+cache: {}
+
+build_image:
+  stage: build
+  script:
+    - echo "$ARGUS_CONFIG" > "${pwd}/config.yaml"
+    - docker build -t harbor.ggollier.com/infra/argus:latest .
+    - docker push harbor.ggollier.com/infra/argus:latest
+
+deploy_kube:
+  image: harbor.ggollier.com/infra/kube:latest
+  stage: deploy
+  when: manual
+  script:
+    - kubectl delete Deployment argus --namespace=argus || echo "Deployment not found"
+    - kubectl apply --namespace=argus -f deploy/deployment.yaml
