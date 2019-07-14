@@ -8,7 +8,7 @@ cache: {}
 build_image:
   stage: build
   script:
-    - echo "$ARGUS_CONFIG" > "${pwd}/config.yaml"
+    - echo "$ARGUS_CONFIG" > ./config.yaml
     - docker build -t harbor.ggollier.com/infra/argus:latest .
     - docker push harbor.ggollier.com/infra/argus:latest
 
