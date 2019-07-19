@@ -17,8 +17,14 @@ if __name__ == "__main__":
     slack_token = config['slack']['token']
     channel_id = config['slack']['channel_id']
     slack_client = SlackClient(slack_token)
-    
-    host_monitors = list(map(lambda x: HostMonitor(x['hosts'], x['username'], x['password']), config['hosts'].values()))
+
+    host_monitors = []
+    for host_type in config['hosts']:
+        host_config = config['hosts'][host_type]
+        if host_type == 'm1000e':
+            host_monitors.append(HostMonitor(host_config['hosts'], host_config['username'], host_config['password'], chassis=host_config['chassis'], fan_threshold=host_config['fan_threshold']))
+        else:
+            host_monitors.append(HostMonitor(host_config['hosts'], host_config['username'], host_config['password']))
 
     print("Starting main event loop")
     while True:
