@@ -18,7 +18,6 @@ class HostMonitor:
         response = []
         for host in self.hosts:
             current_state = check_power_state(host, self.username, self.password)
-            print(current_state)
             if self.history[host] != current_state:
                 response.append(f"Host {host} power state changed from {self.history[host]} to {current_state}")
                 self.history[host] = current_state
@@ -42,6 +41,17 @@ class HostMonitor:
         if self.fan_threshold:
             response.extend(self.check_fan_speed())
         return response
+
+    @staticmethod
+    def setup(hosts: list) -> list:
+        host_monitors = []
+        for host_type in hosts:
+            host_config = hosts[host_type]
+            if host_type == 'm1000e':
+                host_monitors.append(HostMonitor(host_config['hosts'], host_config['username'], host_config['password'], chassis=host_config['chassis'], fan_threshold=host_config['fan_threshold']))
+            else:
+                host_monitors.append(HostMonitor(host_config['hosts'], host_config['username'], host_config['password']))
+        return host_monitors
 
 
 def check_power_state(host: str, username: str, password: str) -> str:
