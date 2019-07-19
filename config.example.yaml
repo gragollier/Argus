@@ -13,5 +13,12 @@ hosts:
     username: <Different IPMI username>
     password: <Different IPMI password>
     hosts:
-      - <IP Address for different hosts>
+      - <IP Address or host name for different hosts>
+  m1000e:
+    username: <CMC username>
+    password: <CMC password>
+    chassis: <CMC IP or hostname>
+    fan_threshold: <Fan RPM at which to begin sending alerts>
+    hosts:
+      - <IPMI IP addresses or hostname>
   

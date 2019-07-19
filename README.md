@@ -18,3 +18,4 @@ $ docker run argus:latest
 ## Modules
 - HostMonitor
     - Basic power state monitoring using IPMI
+    - Custom fan speed checking for my M1000e server chassis
