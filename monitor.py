@@ -30,7 +30,11 @@ if __name__ == "__main__":
     while True:
         sleep(EVENT_LOOP_SLEEP)
         for monitor in host_monitors:
-            res = monitor.run()
-            if len(res) != 0:
-                message = '\n'.join(res)
-                send_slack(slack_client, channel_id, message)
+            try:
+                res = monitor.run()
+                if len(res) != 0:
+                    message = '\n'.join(res)
+                    send_slack(slack_client, channel_id, message)
+            except Exception as exception:
+                send_slack(slack_client, channel_id, f"Argus encountered an error: {exception}")
+            
