@@ -7,6 +7,8 @@ cache: {}
 
 build_image:
   stage: build
+  only:
+    - master
   script:
     - cp $ARGUS_CONFIG ./config.yaml
     - docker build -t harbor.ggollier.com/infra/argus:latest .
@@ -15,6 +17,8 @@ build_image:
 deploy_kube:
   image: harbor.ggollier.com/infra/kube:latest
   stage: deploy
+  only:
+    - master
   script:
     - kubectl delete Deployment argus --namespace=argus || echo "Deployment not found"
     - kubectl apply --namespace=argus -f deploy/deployment.yaml
