@@ -19,3 +19,5 @@ $ docker run argus:latest
 - HostMonitor
     - Basic power state monitoring using IPMI
     - Custom fan speed checking for my M1000e server chassis
+- IPMonitor
+    - Checks that a DNS record points to the current instance's public IP Address (for dynamic IPs)

@@ -3,7 +3,7 @@ slack:
   channel_id: <ID of Slack channel to post in> # Note: Slack must have post access to the channel
 
 host_monitor:
-  sleep_time: <Time to sleep between checking host state>
+  sleep_time: <Time to sleep between checking host state in seconds>
   hosts:
     host_type_name:
       username: <IPMI username for these hosts>
@@ -23,4 +23,8 @@ host_monitor:
       fan_threshold: <Fan RPM at which to begin sending alerts>
       hosts:
         - <IPMI IP addresses or hostname>
-  
+
+ip_monitor:
+  sleep_time: <Time to sleep between checking ip again in seconds>
+  hosts:
+    - <List of domains to lookup>
