@@ -1,7 +1,6 @@
 from slackclient import SlackClient
 import yaml
-from modules.HostMonitor import HostMonitor
-from modules.IPMonitor import IPMonitor
+from modules import *
 from time import sleep
 import asyncio
 
