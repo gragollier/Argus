@@ -36,7 +36,6 @@ async def manage_ip_monitor(slack_client: SlackClient, channel: str, ip_monitor:
 
 async def manage_http_monitor(slack_client: SlackClient, channel: str, https_monitors: list, sleep_time: int):
     while True:
-        await asyncio.sleep(sleep_time)
         for monitor in https_monitors:
             try:
                 res = monitor.run()
@@ -45,6 +44,7 @@ async def manage_http_monitor(slack_client: SlackClient, channel: str, https_mon
                     send_slack(slack_client, channel, message)
             except Exception as exception:
                 send_slack(slack_client, channel, f"HttpMonitor encountered an error: {exception}")
+        await asyncio.sleep(sleep_time)
 
 if __name__ == "__main__":
     print("Argus Started")
