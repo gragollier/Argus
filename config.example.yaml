@@ -28,3 +28,17 @@ ip_monitor:
   sleep_time: <Time to sleep between checking ip again in seconds>
   hosts:
     - <List of domains to lookup>
+
+http_monitor:
+ sleep_time: <Time to sleep between checking>
+ monitors:
+  monitor_1_name:
+    type: 'STATUS_CODE'
+    goal: <Desired status code>
+    hosts:
+      - <List of servers to check>
+  another_monitor:
+    type: 'STATUS_CODE'
+    goal: 404
+    hosts:
+      - <List of servers to check>

@@ -21,3 +21,5 @@ $ docker run argus:latest
     - Custom fan speed checking for my M1000e server chassis
 - IPMonitor
     - Checks that a DNS record points to the current instance's public IP Address (for dynamic IPs)
+- HttpMonitor
+    - Currently supports type of `STATUS_CODE`, which checks if a webserver is returning the desired http status code
