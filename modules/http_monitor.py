@@ -1,4 +1,5 @@
 import requests
+from requests.adapters import HTTPAdapter
 from enum import Enum, auto
 from typing import Generator, List
 
@@ -25,7 +26,10 @@ class HttpMonitor:
         response = []
         for host in self.hosts:
             try:
-                res = requests.get(host)
+                session = requests.Session()
+                session.mount('https://', HTTPAdapter(max_retries=3))
+                session.mount('http://', HTTPAdapter(max_retries=3))
+                res = session.get(host)
                 if (res.status_code != self.goal):
                     response.append(f"HttpMonitor expected a response code of {self.goal} for {host}, but got {res.status_code}")
             except requests.exceptions.ConnectionError as error:
