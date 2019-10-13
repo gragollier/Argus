@@ -1,7 +1,8 @@
+from .base_module import BaseModule
 import subprocess
 import paramiko
 
-class HostMonitor:
+class HostMonitor(BaseModule):
     history = {}
     def __init__(self, hosts: list, username: str, password: str, chassis: str = None, fan_threshold: int = None):
         self.hosts = hosts

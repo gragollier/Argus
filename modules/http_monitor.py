@@ -1,3 +1,4 @@
+from .base_module import BaseModule
 import requests
 from requests.adapters import HTTPAdapter
 from enum import Enum, auto
@@ -9,7 +10,7 @@ class _Type(Enum):
     RETURN_VALUE = 'RETURN_VALUE'
 
 
-class HttpMonitor:
+class HttpMonitor (BaseModule):
     def __init__(self, hosts: list, kind: _Type, goal: str):
         self.hosts = hosts
         self.type = kind

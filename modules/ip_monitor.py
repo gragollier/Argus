@@ -1,7 +1,8 @@
+from .base_module import BaseModule
 import subprocess
 import requests
 
-class IPMonitor:
+class IPMonitor(BaseModule):
     def __init__(self, hosts: list):
         self.hosts = hosts
     
@@ -15,3 +16,7 @@ class IPMonitor:
         return response
     def run(self) -> list:
         return self.check_addresses()
+
+    @staticmethod
+    def setup(hosts: list) -> list:
+        return [IPMonitor(hosts)]
