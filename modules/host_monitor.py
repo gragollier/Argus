@@ -44,7 +44,7 @@ class HostMonitor(BaseModule):
         return response
 
     @staticmethod
-    def setup(hosts: list) -> list:
+    def setup(hosts: dict) -> list:
         host_monitors = []
         for host_type in hosts:
             host_config = hosts[host_type]

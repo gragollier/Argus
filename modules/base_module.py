@@ -7,5 +7,5 @@ class BaseModule(ABC):
         pass
 
     @abstractstaticmethod
-    def setup(hosts: list) -> list:
+    def setup(hosts: dict) -> list:
         pass

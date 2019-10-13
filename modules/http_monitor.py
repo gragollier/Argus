@@ -42,9 +42,9 @@ class HttpMonitor (BaseModule):
         return []
     
     @staticmethod
-    def setup(hosts: list) -> list:
+    def setup(hosts: dict) -> list:
         result = []
-        for host in hosts:
+        for host in hosts.values():
             result.append(HttpMonitor(host['hosts'], _Type(host['type']), host['goal']))
         return result
 

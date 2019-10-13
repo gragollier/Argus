@@ -23,6 +23,7 @@ async def manage_module(slack_client: SlackClient, channel: str, host_monitors: 
             except Exception as exception:
                 send_slack(slack_client, channel, f"{monitor.__class__.__name__} encountered an error: {exception}")
 
+
 if __name__ == "__main__":
     print("Argus Started")
 
@@ -33,15 +34,16 @@ if __name__ == "__main__":
 
     loop = asyncio.get_event_loop()
 
-    if ('host_monitor' in config.keys() and 'hosts' in config['host_monitor'].keys()):
-        host_monitors = HostMonitor.setup(config['host_monitor']['hosts'])
-        loop.create_task(manage_module(slack_client, channel_id, host_monitors, config['host_monitor']['sleep_time']))
-    if ('ip_monitor' in config.keys() and 'hosts' in config['ip_monitor'].keys()):
-        ip_monitor = IPMonitor.setup(config['ip_monitor']['hosts'])
-        loop.create_task(manage_module(slack_client, channel_id, ip_monitor, config['ip_monitor']['sleep_time']))
-    if ('http_monitor' in config.keys() and 'monitors' in config['http_monitor'].keys()):
-        http_monitors = HttpMonitor.setup(config['http_monitor']['monitors'].values())
-        loop.create_task(manage_module(slack_client, channel_id, http_monitors, config['http_monitor']['sleep_time']))
+    modules = {
+        'host_monitor': HostMonitor,
+        'ip_monitor': IPMonitor,
+        'http_monitor': HttpMonitor
+        }
+
+    for (module_name, module_class) in modules.items():
+        if module_name in config.keys():
+            monitors = module_class.setup(config[module_name]['monitors'])
+            loop.create_task(manage_module(slack_client, channel_id, monitors, config[module_name]['sleep_time']))
 
     print("Starting main event loop")
     loop.run_forever()

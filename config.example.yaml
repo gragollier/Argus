@@ -4,7 +4,7 @@ slack:
 
 host_monitor:
   sleep_time: <Time to sleep between checking host state in seconds>
-  hosts:
+  monitors:
     host_type_name:
       username: <IPMI username for these hosts>
       password: <IPMI password for these hosts>
@@ -26,7 +26,7 @@ host_monitor:
 
 ip_monitor:
   sleep_time: <Time to sleep between checking ip again in seconds>
-  hosts:
+  monitors:
     - <List of domains to lookup>
 
 http_monitor:
